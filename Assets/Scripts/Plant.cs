@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 public class Plant : MonoBehaviour
@@ -26,11 +27,11 @@ public class Plant : MonoBehaviour
     float yieldRate;
 
     public float yield;
+    public float harvestedYield = 0f;
 
-    //Debug
-    public float givenYield = 0f;
-    public bool crop = false;
-    public bool harvest = false;
+    //Debug TODO: remove
+    [SerializeField] Text yieldText;
+    [SerializeField] Text harvestedYieldText;
 
     // Use this for initialization
     void Start()
@@ -45,17 +46,8 @@ public class Plant : MonoBehaviour
         Evolve();
         Yield();
 
-
-        //debug
-        if(crop){
-            crop = false;
-            givenYield = Crop();
-        }
-
-        if(harvest){
-            harvest = false;
-            givenYield = Harvest();
-        }
+        yieldText.text = yield.ToString();
+        harvestedYieldText.text = harvestedYield.ToString();
     }
 
     private void Yield()
@@ -68,6 +60,16 @@ public class Plant : MonoBehaviour
 
     }
 
+    public void buttonHarvest(float lostRate = 0)
+    {
+        Harvest(lostRate);
+    }
+
+    public void buttonCrop(float lostRate = 0)
+    {
+        Crop(lostRate);
+    }
+
     // Get yield, returns 1 evolution stage adn resets
     public float Harvest(float lostRate = 0){
         float harvestYield = yield * (1 - lostRate);
@@ -75,19 +77,19 @@ public class Plant : MonoBehaviour
         evolutionIndex--;
         cropTileMap.SetTile(pos, evolutionTiles[evolutionIndex]);
         Reset();
-
+        harvestedYield = harvestYield;
         return harvestYield;
     }
 
     // Get yield, returns to initial evolution state nad resets
-    private float Crop(float lostRate = 0)
+    public float Crop(float lostRate = 0)
     {
         float cropYield = yield * (1 - lostRate);
 
         evolutionIndex = 0;
         cropTileMap.SetTile(pos, evolutionTiles[evolutionIndex]);
         Reset();
-
+        harvestedYield = cropYield;
         return cropYield;
     }
 
