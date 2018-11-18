@@ -14,6 +14,7 @@ public class Plant : MonoBehaviour
     // Prefabs
     [SerializeField] Tilemap cropTileMap;
     [SerializeField] Tile[] evolutionTiles;
+    [SerializeField] Tile rottenTile;
 
     // Design configs
     [Tooltip("How many units yielded per second.")]
@@ -108,20 +109,7 @@ public class Plant : MonoBehaviour
     {
         GridLayout gridLayout = FindObjectOfType<GridLayout>();
         pos = gridLayout.WorldToCell(transform.position);
-        Vector3 worldPos = gridLayout.CellToWorld(pos);
-
-        transform.position = worldPos;
-
-        //Debug.Log(gridLayout.cellSize);
-        //Debug.Log(pos);
-        //Debug.Log(worldPos);
-
-        //float worldX = worldPos.x - gridLayout.cellSize.x / 2;
-        //float worldY = worldPos.y - gridLayout.cellSize.y / 2;
-        ////transform.position = new Vector3(worldX, worldY, pos.z);
-        ////transform.position = gridLayout.CellToWorld(pos);
-
-
+        transform.position = gridLayout.CellToWorld(pos);
 
         if (evolutionTiles.Length > 0)
         {
@@ -150,12 +138,13 @@ public class Plant : MonoBehaviour
         reachedMaxYield = false;
     }
 
-    public bool AttemptInfection(Disease disease)
+    public bool AttemptInfection(Disease disease, float chance)
     {
         if (infectedBy.Contains(disease.type)) return false;
         if (!disease.affectedPlantTypes.Contains(plantType)) return false;
-        if (UnityEngine.Random.value > disease.infectionChance) return false;
+        if (UnityEngine.Random.value > chance) return false;
 
+        //cropTileMap.SetTile(pos, rottenTile); //actually this should be true only after total destruction
         infectedBy.Add(disease.type);
         return true;
     }

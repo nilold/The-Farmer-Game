@@ -13,7 +13,7 @@ public class PlantManager : MonoBehaviour
     [SerializeField] GameObject infectionPrefab;
     [SerializeField] Disease[] diseasesPrefabs;
     [Tooltip("Number of seconds between new infections attempts")]
-    [SerializeField] float diseaseContaminationPeriod = 5f;
+    [SerializeField] float infectionPeriod = 5f;
     [Tooltip("Number of seconds between contaminations attempts")]
     [SerializeField] float diseaseSpreadPeriod = 1f;
 
@@ -35,13 +35,13 @@ public class PlantManager : MonoBehaviour
     void InfectPlants()
     {
         timeSinceLastInfectionRound += Time.deltaTime;
-        if (timeSinceLastInfectionRound < diseaseContaminationPeriod) return;
+        if (timeSinceLastInfectionRound < infectionPeriod) return;
 
         foreach (Disease disease in diseasesPrefabs)
         {
             foreach (Plant plant in FindObjectsOfType<Plant>())
             {
-                AtemptInfect(disease, plant);
+                AtemptInfect(disease, plant, disease.infectionChance);
             }
         }
 
@@ -59,22 +59,24 @@ public class PlantManager : MonoBehaviour
             foreach (Collider2D neighbourCollider in neighbours)
             {
                 Plant plant = neighbourCollider.gameObject.GetComponent<Plant>();
-                AtemptInfect(infection.disease, plant);
+                AtemptInfect(infection.disease, plant, infection.disease.spreadChance);
             }
         }
 
         timeSinceLastContaminationRound = 0f;
     }
 
-    private void AtemptInfect(Disease disease, Plant plant)
+    private void AtemptInfect(Disease disease, Plant plant, float chance)
     {
-        if (plant.AttemptInfection(disease))
+        if (plant.AttemptInfection(disease, chance))
         {
             Debug.Log(string.Format("{0} infected with {1}", plant.name, disease.name));
             GameObject infection = Instantiate(infectionPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             infection.GetComponent<Infection>().plant = plant;
             infection.GetComponent<Infection>().disease = disease;
             infection.transform.parent = infectionsParent.transform;
+
+            //disease.infectionChance = 0; // debug
         }
     }
 
