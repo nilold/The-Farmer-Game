@@ -6,28 +6,22 @@ public class Infection : MonoBehaviour {
 
     public Plant plant;
     public Disease disease;
+
     float infestation = 0.01f; // starts at 1%
+    public Vector3Int pos;
 
-    public Infection(Plant plant, Disease disease)
-    {
-
-    }
-
-	// Use this for initialization
-	void Start () {
+    void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
 	}
 
-    void Damage(){
-
+    public Vector2 GetInfectionPoint(){
+        return new Vector2(plant.pos.x, plant.pos.y);
     }
 
-    void Spread(){
+    void Damage(){
 
     }
 }

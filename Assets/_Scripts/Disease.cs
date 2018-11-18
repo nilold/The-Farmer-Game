@@ -11,8 +11,10 @@ public class Disease : MonoBehaviour {
     [SerializeField] PlantManager.EnvironmentConditions[] negativeEnvironmentFactors;
     [SerializeField] float defaultAppearanceRate = 1f;
 
-    [Tooltip("Probability of infect a target plant or spread to neighbour")]
+    [Tooltip("Probability of infect a target plant")]
     [SerializeField] public float infectionChance;
+    [Tooltip("Probability of infect a neighbour plant")]
+    [SerializeField] public float spreadChance;
     [SerializeField] float infestationThreshold;
     [SerializeField] float qualityAffliction;
     [SerializeField] float yieldAffliction;

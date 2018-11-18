@@ -22,13 +22,14 @@ public class Plant : MonoBehaviour
     [Tooltip("Number of seconds between each evolutions")]
     [SerializeField] float defaultEvolutionPeriod = 1f;
 
-    // Internal (public vars are for debug purposes)
+    public Vector3Int pos;
+
+    // Internal
     int evolutionIndex;
     bool isHarvested;
     bool isEvolved;
     bool reachedMaxYield;
     float timeSinceLastEvolution;
-    Vector3Int pos;
 
     // Afflicted by diseases
     public List<PlantManager.DiseaseTypes> infectedBy;
@@ -107,6 +108,21 @@ public class Plant : MonoBehaviour
     {
         GridLayout gridLayout = FindObjectOfType<GridLayout>();
         pos = gridLayout.WorldToCell(transform.position);
+        Vector3 worldPos = gridLayout.CellToWorld(pos);
+
+        transform.position = worldPos;
+
+        //Debug.Log(gridLayout.cellSize);
+        //Debug.Log(pos);
+        //Debug.Log(worldPos);
+
+        //float worldX = worldPos.x - gridLayout.cellSize.x / 2;
+        //float worldY = worldPos.y - gridLayout.cellSize.y / 2;
+        ////transform.position = new Vector3(worldX, worldY, pos.z);
+        ////transform.position = gridLayout.CellToWorld(pos);
+
+
+
         if (evolutionTiles.Length > 0)
         {
             cropTileMap.SetTile(pos, evolutionTiles[evolutionIndex]);
