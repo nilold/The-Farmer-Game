@@ -7,24 +7,34 @@ using UnityEngine.Tilemaps;
 
 public class Plant : MonoBehaviour
 {
+    // Statics 
+    [SerializeField] String plantDisplayName = "Coffe";
+    [SerializeField] PlantManager.PlantTypes plantType;
+
     // Prefabs
     [SerializeField] Tilemap cropTileMap;
     [SerializeField] Tile[] evolutionTiles;
-    [SerializeField] float defaultYieldRate = 1f;
-    [SerializeField] float yieldQuantity = 1f;
-    [SerializeField] float maxYield = 10f;
 
     // Design configs
+    [Tooltip("How many units yielded per second.")]
+    [SerializeField] float defaultYieldRate = 1f;
+    [SerializeField] float defaultMaxYield = 10f;
     [Tooltip("Number of seconds between each evolutions")]
-    [SerializeField] float evolutionPeriod = 1f;
+    [SerializeField] float defaultEvolutionPeriod = 1f;
 
     // Internal (public vars are for debug purposes)
     int evolutionIndex;
+    bool isHarvested;
     bool isEvolved;
     bool reachedMaxYield;
     float timeSinceLastEvolution;
     Vector3Int pos;
+
+    // Afflicted by diseases
     float yieldRate;
+    float maxYield;
+    float quality;
+    float evolutionPeriod;
 
     public float yield;
     public float harvestedYield = 0f;
@@ -40,7 +50,7 @@ public class Plant : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         InitTile();
     }
-
+    // TODO: average game frequency may be slower, to reduce cpu usage
     void Update()
     {
         Evolve();
@@ -52,47 +62,29 @@ public class Plant : MonoBehaviour
 
     private void Yield()
     {
+        if (reachedMaxYield) yield = maxYield; // its important to be here, case the plant is afflicted by a maxYield disease
         if (!isEvolved) return;
         if (reachedMaxYield) return;
 
         yield += Time.deltaTime * yieldRate;
         reachedMaxYield = yield >= maxYield;
-
-    }
-
-    public void buttonHarvest(float lostRate = 0)
-    {
-        Harvest(lostRate);
-    }
-
-    public void buttonCrop(float lostRate = 0)
-    {
-        Crop(lostRate);
     }
 
     // Get yield, returns 1 evolution stage adn resets
-    public float Harvest(float lostRate = 0){
+    public Yield Harvest(float lostRate = 0, bool crop = false){
         float harvestYield = yield * (1 - lostRate);
 
-        evolutionIndex--;
+        evolutionIndex = crop ? 0 : evolutionIndex - 1;
+
         cropTileMap.SetTile(pos, evolutionTiles[evolutionIndex]);
         Reset();
         harvestedYield = harvestYield;
-        return harvestYield;
+
+        return new Yield(plantType, harvestYield, quality);
     }
 
-    // Get yield, returns to initial evolution state nad resets
-    public float Crop(float lostRate = 0)
-    {
-        float cropYield = yield * (1 - lostRate);
 
-        evolutionIndex = 0;
-        cropTileMap.SetTile(pos, evolutionTiles[evolutionIndex]);
-        Reset();
-        harvestedYield = cropYield;
-        return cropYield;
-    }
-
+    // Evole to next stage, if period has passed
     private void Evolve()
     {
         if (isEvolved) return;
@@ -108,6 +100,7 @@ public class Plant : MonoBehaviour
 
     }
 
+    // Finds its own position on grid, set first tile and resets
     private void InitTile()
     {
         GridLayout gridLayout = FindObjectOfType<GridLayout>();
@@ -128,8 +121,27 @@ public class Plant : MonoBehaviour
     private void Reset()
     {
         yield = 0f;
+        quality = 1;
         timeSinceLastEvolution = 0f;
+
         yieldRate = defaultYieldRate;
+        maxYield = defaultMaxYield;
+        evolutionPeriod = defaultEvolutionPeriod;
+
         isEvolved = false;
+        reachedMaxYield = false;
+    }
+
+
+
+    // Debug functions ------------------------------
+    public void buttonHarvest(float lostRate = 0)
+    {
+        Harvest(lostRate);
+    }
+
+    public void buttonCrop(float lostRate = 0)
+    {
+        Harvest(lostRate, true);
     }
 }

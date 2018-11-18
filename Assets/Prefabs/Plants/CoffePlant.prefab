@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de800955810674470b50963fb8737e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantDisplayName: Coffe
+  plantType: 0
   cropTileMap: {fileID: 0}
   evolutionTiles:
   - {fileID: 11400000, guid: 3a24411acb3924f519eaf1871a739a89, type: 2}
@@ -61,11 +63,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8f865ade20a03407db75c51216656372, type: 2}
   - {fileID: 11400000, guid: 7addb8ac242cc465681138c084c6f234, type: 2}
   defaultYieldRate: 1
-  yieldQuantity: 1
-  maxYield: 25
-  evolutionPeriod: 1
+  defaultMaxYield: 10
+  defaultEvolutionPeriod: 1
   yield: 0
   harvestedYield: 0
+  yieldText: {fileID: 0}
+  harvestedYieldText: {fileID: 0}
 --- !u!212 &212924260174837392
 SpriteRenderer:
   m_ObjectHideFlags: 1
