@@ -31,6 +31,7 @@ public class Plant : MonoBehaviour
     Vector3Int pos;
 
     // Afflicted by diseases
+    public List<PlantManager.DiseaseTypes> infectedBy;
     float yieldRate;
     float maxYield;
     float quality;
@@ -46,8 +47,8 @@ public class Plant : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        yieldRate = defaultYieldRate;
         GetComponent<SpriteRenderer>().enabled = false;
+        infectedBy = new List<PlantManager.DiseaseTypes>();
         InitTile();
     }
     // TODO: average game frequency may be slower, to reduce cpu usage
@@ -71,7 +72,8 @@ public class Plant : MonoBehaviour
     }
 
     // Get yield, returns 1 evolution stage adn resets
-    public Yield Harvest(float lostRate = 0, bool crop = false){
+    public Yield Harvest(float lostRate = 0, bool crop = false)
+    {
         float harvestYield = yield * (1 - lostRate);
 
         evolutionIndex = crop ? 0 : evolutionIndex - 1;
@@ -130,6 +132,16 @@ public class Plant : MonoBehaviour
 
         isEvolved = false;
         reachedMaxYield = false;
+    }
+
+    public bool AttemptInfection(Disease disease)
+    {
+        if (infectedBy.Contains(disease.type)) return false;
+        if (!disease.affectedPlantTypes.Contains(plantType)) return false;
+        if (UnityEngine.Random.value > disease.infectionChance) return false;
+
+        infectedBy.Add(disease.type);
+        return true;
     }
 
 
