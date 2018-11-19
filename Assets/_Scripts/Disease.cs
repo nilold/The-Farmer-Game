@@ -12,16 +12,18 @@ public class Disease : MonoBehaviour {
     [SerializeField] float defaultAppearanceRate = 1f;
 
     [Tooltip("Probability of infect a target plant")]
+    [Range(0, 1)] 
     [SerializeField] public float infectionChance;
     [Tooltip("Probability of infect a neighbour plant")]
+    [Range(0, 1)] 
     [SerializeField] public float spreadChance;
-    [SerializeField] float infestationThreshold;
-    [SerializeField] float qualityAffliction;
-    [SerializeField] float yieldAffliction;
-    [SerializeField] float developmentAffliction;
+    [SerializeField] public float infestationThreshold;
+    [SerializeField] public float qualityAffliction;
+    [SerializeField] public float yieldAffliction;
+    [SerializeField] public float developmentAffliction;
 
-    [SerializeField] bool treatedByCropping;
-    [SerializeField] bool treatedByHarvesting;
+    [SerializeField] public bool treatedByCropping;
+    [SerializeField] public bool treatedByHarvesting;
 
 
 }

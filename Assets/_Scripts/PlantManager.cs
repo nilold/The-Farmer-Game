@@ -13,9 +13,11 @@ public class PlantManager : MonoBehaviour
     [SerializeField] GameObject infectionPrefab;
     [SerializeField] Disease[] diseasesPrefabs;
     [Tooltip("Number of seconds between new infections attempts")]
-    [SerializeField] float infectionPeriod = 5f;
+    [SerializeField] public static float infectionPeriod = 5f;
     [Tooltip("Number of seconds between contaminations attempts")]
-    [SerializeField] float diseaseSpreadPeriod = 1f;
+    [SerializeField] public static float  diseaseSpreadPeriod = 1f;
+    [Tooltip("Number of seconds between disease damages")]
+    [SerializeField] public static float diseaseDamagePeriod = 1f;
 
     // Internal
     float timeSinceLastInfectionRound;

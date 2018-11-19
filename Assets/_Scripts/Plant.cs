@@ -32,13 +32,16 @@ public class Plant : MonoBehaviour
     bool reachedMaxYield;
     float timeSinceLastEvolution;
 
-    // Afflicted by diseases
+    // Afflicted by diseases parameters
     public List<PlantManager.DiseaseTypes> infectedBy;
-    float yieldRate;
-    float maxYield;
-    float quality;
-    float evolutionPeriod;
+    public float yieldRate;
+    public float maxYield;
+    public float quality;
+    public float evolutionPeriod;
 
+    public Input[] appliedInputs;
+
+    // Yield status
     public float yield;
     public float harvestedYield = 0f;
 
@@ -148,7 +151,6 @@ public class Plant : MonoBehaviour
         infectedBy.Add(disease.type);
         return true;
     }
-
 
 
     // Debug functions ------------------------------
