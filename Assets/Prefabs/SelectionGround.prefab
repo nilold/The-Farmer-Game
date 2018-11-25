@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1954656982237158}
+  m_RootGameObject: {fileID: 1378540848957520}
   m_IsPrefabAsset: 1
---- !u!1 &1954656982237158
+--- !u!1 &1378540848957520
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4552244019776934}
-  - component: {fileID: 114114903036739144}
-  - component: {fileID: 212924260174837392}
-  - component: {fileID: 61636307266523382}
+  - component: {fileID: 4562586357849974}
+  - component: {fileID: 212797293892042680}
+  - component: {fileID: 114498292204365634}
+  - component: {fileID: 61238348252727026}
   m_Layer: 0
-  m_Name: CoffePlant
+  m_Name: SelectionGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4552244019776934
+--- !u!4 &4562586357849974
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1954656982237158}
+  m_GameObject: {fileID: 1378540848957520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61636307266523382
+--- !u!61 &61238348252727026
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1954656982237158}
+  m_GameObject: {fileID: 1378540848957520}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -59,57 +59,32 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+    drawMode: 2
+    adaptiveTiling: 1
+  m_AutoTiling: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114114903036739144
+--- !u!114 &114498292204365634
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1954656982237158}
+  m_GameObject: {fileID: 1378540848957520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de800955810674470b50963fb8737e0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 26174fb558d2648fda1142e25b942e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Coffe Plant
-  icon: {fileID: 21300000, guid: 75c0c4d80a7bf40acb3cebed5dbc4df3, type: 3}
-  plantDisplayName: Coffe
-  plantType: 0
-  cost: 5
-  cropTileMap: {fileID: 0}
-  evolutionTiles:
-  - {fileID: 11400000, guid: 3a24411acb3924f519eaf1871a739a89, type: 2}
-  - {fileID: 11400000, guid: d7d1093119f26467a9f6c3ade26a760f, type: 2}
-  - {fileID: 11400000, guid: 89592bcac99ee44ab87fb480054e4db4, type: 2}
-  - {fileID: 11400000, guid: 8705e7817bf4e48779cdee22d4edba50, type: 2}
-  - {fileID: 11400000, guid: 8f865ade20a03407db75c51216656372, type: 2}
-  - {fileID: 11400000, guid: 7addb8ac242cc465681138c084c6f234, type: 2}
-  rottenTile: {fileID: 11400000, guid: 8d793ca7a4cad4d5fa05c71abdaf633f, type: 2}
-  defaultYieldRate: 1
-  defaultMaxYield: 10
-  defaultEvolutionPeriod: 1
-  pos: {x: 0, y: 0, z: 0}
-  infectedBy: 
-  yieldRate: 1
-  maxYield: 20
-  quality: 0
-  evolutionPeriod: 2
-  appliedInputs: []
-  yield: 0
-  harvestedYield: 0
---- !u!212 &212924260174837392
+  confirmButton: {fileID: 0}
+--- !u!212 &212797293892042680
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1954656982237158}
+  m_GameObject: {fileID: 1378540848957520}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -139,14 +114,14 @@ SpriteRenderer:
   m_SortingLayerID: 229807355
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300036, guid: 92d85f5d0f628429db384db89a816f10, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 92d85f5d0f628429db384db89a816f10, type: 3}
+  m_Color: {r: 0.8745098, g: 0.78039217, b: 0.05490196, a: 0.67058825}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 2
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
