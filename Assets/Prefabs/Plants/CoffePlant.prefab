@@ -78,8 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de800955810674470b50963fb8737e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Coffe Plant
+  icon: {fileID: 21300000, guid: 75c0c4d80a7bf40acb3cebed5dbc4df3, type: 3}
   plantDisplayName: Coffe
   plantType: 0
+  cost: 5
+  icon: {fileID: 0}
   cropTileMap: {fileID: 0}
   evolutionTiles:
   - {fileID: 11400000, guid: 3a24411acb3924f519eaf1871a739a89, type: 2}
@@ -94,10 +98,13 @@ MonoBehaviour:
   defaultEvolutionPeriod: 1
   pos: {x: 0, y: 0, z: 0}
   infectedBy: 
+  yieldRate: 1
+  maxYield: 20
+  quality: 0
+  evolutionPeriod: 2
+  appliedInputs: []
   yield: 0
   harvestedYield: 0
-  yieldText: {fileID: 0}
-  harvestedYieldText: {fileID: 0}
 --- !u!212 &212924260174837392
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -130,8 +137,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 229807355
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300036, guid: 92d85f5d0f628429db384db89a816f10, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

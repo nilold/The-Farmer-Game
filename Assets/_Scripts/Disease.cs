@@ -11,15 +11,23 @@ public class Disease : MonoBehaviour {
     [SerializeField] PlantManager.EnvironmentConditions[] negativeEnvironmentFactors;
     [SerializeField] float defaultAppearanceRate = 1f;
 
+    [Range(0, 1)]
     [Tooltip("Probability of infect a target plant")]
-    [Range(0, 1)] 
     [SerializeField] public float infectionChance;
+    [Range(0, 1)]
     [Tooltip("Probability of infect a neighbour plant")]
-    [Range(0, 1)] 
     [SerializeField] public float spreadChance;
+    [Range(0, 1)]
+    [Tooltip("Infestation level above which afflictions begin")]
     [SerializeField] public float infestationThreshold;
+    [Range(0, 0.1f)]
+    [Tooltip("Yield quality affliction level")]
     [SerializeField] public float qualityAffliction;
+    [Range(0, 0.1f)]
+    [Tooltip("Afects both plant's yield rate and max yield")]
     [SerializeField] public float yieldAffliction;
+    [Range(0, 0.1f)]
+    [Tooltip("Afects plant`s development rate")]
     [SerializeField] public float developmentAffliction;
 
     [SerializeField] public bool treatedByCropping;

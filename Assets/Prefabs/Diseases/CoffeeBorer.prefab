@@ -56,11 +56,11 @@ MonoBehaviour:
   positiveEnvironmentFactors: 00000000
   negativeEnvironmentFactors: 01000000
   defaultAppearanceRate: 1
-  infectionChance: 0.01
+  infectionChance: 0.429
   spreadChance: 0.1
   infestationThreshold: 0.3
-  qualityAffliction: 1
-  yieldAffliction: 0.8
+  qualityAffliction: 0.05
+  yieldAffliction: 0.02
   developmentAffliction: 0
   treatedByCropping: 1
   treatedByHarvesting: 1

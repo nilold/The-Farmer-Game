@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Input : MonoBehaviour {
+public class FarmInput : MonoBehaviour {
 
     [SerializeField] public FarmManager.InputType inputType;
 

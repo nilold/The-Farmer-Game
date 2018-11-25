@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
-public class Plant : MonoBehaviour
+public class Plant : Item
 {
     // Statics 
     [SerializeField] String plantDisplayName = "Coffe";
     [SerializeField] PlantManager.PlantTypes plantType;
+    [SerializeField] public float cost;
 
     // Prefabs
     [SerializeField] Tilemap cropTileMap;
@@ -32,22 +33,22 @@ public class Plant : MonoBehaviour
     bool reachedMaxYield;
     float timeSinceLastEvolution;
 
-    // Afflicted by diseases parameters
+    // Afflicted by diseases parameters  TODO: private
     public List<PlantManager.DiseaseTypes> infectedBy;
     public float yieldRate;
     public float maxYield;
     public float quality;
     public float evolutionPeriod;
 
-    public Input[] appliedInputs;
+    public FarmInput[] appliedInputs;
 
-    // Yield status
+    // Yield status TODO: private
     public float yield;
     public float harvestedYield = 0f;
 
-    //Debug TODO: remove
-    [SerializeField] Text yieldText;
-    [SerializeField] Text harvestedYieldText;
+    //DEBUG
+    //[SerializeField] Text yieldText;
+    //[SerializeField] Text harvestedYieldText;
 
     // Use this for initialization
     void Start()
@@ -62,8 +63,9 @@ public class Plant : MonoBehaviour
         Evolve();
         Yield();
 
-        yieldText.text = yield.ToString();
-        harvestedYieldText.text = harvestedYield.ToString();
+        //DEBUG
+        //yieldText.text = yield.ToString();
+        //harvestedYieldText.text = harvestedYield.ToString();
     }
 
     private void Yield()
@@ -110,6 +112,7 @@ public class Plant : MonoBehaviour
     // Finds its own position on grid, set first tile and resets
     private void InitTile()
     {
+        cropTileMap = GameObject.FindGameObjectWithTag("CropsTile").GetComponent<Tilemap>();
         GridLayout gridLayout = FindObjectOfType<GridLayout>();
         pos = gridLayout.WorldToCell(transform.position);
         transform.position = gridLayout.CellToWorld(pos);
@@ -153,6 +156,12 @@ public class Plant : MonoBehaviour
     }
 
 
+    public override void Use()
+    {
+        base.Use();
+        GameManager.selectedItem = this;
+    }
+
     // Debug functions ------------------------------
     public void buttonHarvest(float lostRate = 0)
     {
@@ -163,4 +172,5 @@ public class Plant : MonoBehaviour
     {
         Harvest(lostRate, true);
     }
+    
 }

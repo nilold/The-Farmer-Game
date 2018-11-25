@@ -6,14 +6,16 @@ public class Infection : MonoBehaviour {
 
     public Plant plant;
     public Disease disease;
+    PlantManager plantManager;
 
-    float infestation = 0.05f; // starts at 5% TODO: tune
+    // TODO: private
+    public float infestation = 0.05f; // starts at 5% TODO: tune
     public Vector3Int pos;
     float timeSinceLastDamage;
     float timeSinceLastInfestation;
 
     void Start () {
-		
+        plantManager = FindObjectOfType<PlantManager>();
 	}
 	
 	void Update () {
@@ -28,7 +30,7 @@ public class Infection : MonoBehaviour {
     void Infestate()
     {
         timeSinceLastInfestation += Time.deltaTime;
-        if (timeSinceLastInfestation < PlantManager.diseaseSpreadPeriod) return;
+        if (timeSinceLastInfestation < plantManager.diseaseSpreadPeriod) return;
 
         float protectionLevel = GetProtectionLevel();
         infestation *= (1 + disease.spreadChance - protectionLevel);
@@ -46,7 +48,7 @@ public class Infection : MonoBehaviour {
     private float GetProtectionLevel()
     {
         float protectionLevel = 0f;
-        foreach (Input input in plant.appliedInputs)
+        foreach (FarmInput input in plant.appliedInputs)
         {
             if (input.targetDiseases.Contains(disease.type))
             {
@@ -62,7 +64,7 @@ public class Infection : MonoBehaviour {
         timeSinceLastDamage += Time.deltaTime;
 
         if (infestation < disease.infestationThreshold) return;
-        if (timeSinceLastDamage < PlantManager.diseaseDamagePeriod) return;
+        if (timeSinceLastDamage < plantManager.diseaseDamagePeriod) return;
 
         plant.yieldRate *= (1 - disease.yieldAffliction * infestation);
         plant.maxYield *= (1 - disease.yieldAffliction * infestation);
